@@ -72,6 +72,3 @@ receipt-automation-pipeline/
 
 ---
 
-## 👤 Author
-
-Your Name
