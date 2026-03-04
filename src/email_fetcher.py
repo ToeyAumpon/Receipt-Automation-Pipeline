@@ -5,9 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 CLIENT_ID = os.getenv("CLIENT_ID")
-CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
-credentials = (CLIENT_ID, CLIENT_SECRET)
+credentials = (CLIENT_ID, )
 
 def get_account():
     token_backend = FileSystemTokenBackend(
@@ -16,20 +15,30 @@ def get_account():
     )
     account = Account(
         credentials,
-        auth_flow_type='authorization',
+        auth_flow_type='public',
         tenant_id='consumers',
-        token_backend=token_backend,
-        redirect_uri='https://login.microsoftonline.com/common/oauth2/nativeclient'
+        token_backend=token_backend
     )
     return account
 
-def authenticate():
+def get_receipt_emails():
     account = get_account()
-    if not account.is_authenticated:
-        account.authenticate(scopes=['basic', 'message_all'])
-    return account
+    mailbox = account.mailbox()
+    
+    # Get the Yucho folder instead of inbox
+    yucho_folder = mailbox.get_folder(folder_name='Yucho')
+    
+    # Fetch last 10 emails
+    messages = yucho_folder.get_messages(limit=10)
+    
+    for message in messages:
+        print("---")
+        print(f"From: {message.sender}")
+        print(f"Subject: {message.subject}")
+        print(f"Date: {message.received}")
+        print(f"Body preview: {message.body_preview}")
 
 if __name__ == "__main__":
-    print("Testing connection...")
-    account = authenticate()
-    print("Connected successfully!")
+    print("Fetching emails...")
+    get_receipt_emails()
+    print("Done!")

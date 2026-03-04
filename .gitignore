@@ -1,4 +1,5 @@
 venv/
 .env
+o365_token.txt
 __pycache__/
 *.pyc
