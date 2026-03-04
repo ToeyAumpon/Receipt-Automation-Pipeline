@@ -1,5 +1,6 @@
 venv/
 .env
 o365_token.txt
+google_credentials.json
 __pycache__/
 *.pyc
