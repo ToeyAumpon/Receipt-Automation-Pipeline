@@ -29,6 +29,10 @@ jobs:
         run: |
           echo '${{ secrets.GOOGLE_CREDENTIALS }}' > google_credentials.json
 
+      - name: Create O365 token file
+        run: |
+          echo '${{ secrets.O365_TOKEN }}' > o365_token.txt
+
       - name: Run receipt fetcher
         run: python src/email_fetcher.py
 
@@ -37,7 +41,7 @@ jobs:
 
 # ## Step 4 — Update requirements.txt
 
-# Open `requirements.txt` and make sure it has everything:
+# Open `requirements.txt` and make sure it  everything:
 # ```
 # requests
 # msal
