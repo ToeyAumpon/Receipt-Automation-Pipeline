@@ -1,0 +1,49 @@
+name: Daily Receipt Fetch
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at 9:00 AM Japan time 
+  workflow_dispatch:  # Allows manual trigger from GitHub
+
+jobs:
+  fetch-receipts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
+
+      - name: Create Google credentials file
+        run: |
+          echo '${{ secrets.GOOGLE_CREDENTIALS }}' > google_credentials.json
+
+      - name: Run receipt fetcher
+        run: python src/email_fetcher.py
+
+# Save with `Ctrl + S`.
+
+
+# ## Step 4 — Update requirements.txt
+
+# Open `requirements.txt` and make sure it has everything:
+# ```
+# requests
+# msal
+# O365
+# gspread
+# google-auth
+# streamlit
+# pandas
+# python-dotenv
