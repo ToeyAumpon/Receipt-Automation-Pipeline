@@ -56,7 +56,7 @@ Category tags — label each store as Food, Transport, Shopping etc.
 
 ## 📁 Project Structure
 
-![Dashboard](img/スクリーンショット 2026-03-05 163309.png)
+![Dashboard](img/folder.png)
 
 ## 🚀 How It Works
 
