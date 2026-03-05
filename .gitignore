@@ -3,4 +3,6 @@ venv/
 o365_token.txt
 google_credentials.json
 __pycache__/
+~$Procedure and Memo.xlsx
 *.pyc
+
