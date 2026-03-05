@@ -26,13 +26,14 @@ def get_sheet():
         logger.error(f"Error connecting to Google Sheets: {e}")
         raise
 
-def is_duplicate(sheet, approval_no, time):
+def is_duplicate(sheet, approval_no, time, amount):
     """Check if this receipt already exists in the sheet"""
     try:
         records = sheet.get_all_records()
         for record in records:
             if (str(record.get('Approval No')).strip() == str(approval_no).strip() and
-                str(record.get('Time')).strip() == str(time).strip()):
+                str(record.get('Time')).strip() == str(time).strip() and
+                str(record.get('Amount')).strip() == str(amount).strip()):
                 return True
         return False
     except Exception as e:
@@ -44,7 +45,7 @@ def append_receipt(receipt):
     try:
         sheet = get_sheet()
         
-        if is_duplicate(sheet, receipt['approval_no'], receipt['time']):
+        if is_duplicate(sheet, receipt['approval_no'], receipt['time'], receipt['amount']):
             logger.info(f"Skipping duplicate: {receipt['store']} on {receipt['date']}")
             print(f"⏭️  Skipping duplicate: {receipt['store']} on {receipt['date']}")
             return False
