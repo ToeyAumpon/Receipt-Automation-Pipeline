@@ -68,8 +68,29 @@ Multi-currency support — handle receipts in different currencies if you travel
 2. Script connects to Outlook via Microsoft Graph API (O365 library)
 3. Filters emails from @jp-post.jp (Yucho Bank debit receipts)
 4. Regex extracts transaction fields from email body:
+   - 利用日時 → date & time
+   - 利用店舗 → store name
+   - 利用金額 → amount
+   - 利用通貨 → currency
+   - 承認番号 → approval number
 5. New rows appended to Google Sheets (duplicates skipped)
 6. Streamlit dashboard reads Sheets and displays charts
+
+```
+receipt-automation-pipeline/
+├── .github/
+│   └── workflows/
+│       └── daily_run.yml        ← GitHub Actions schedule
+├── src/
+│   ├── email_fetcher.py         ← Connect to Outlook via O365
+│   ├── parser.py                ← Extract fields with regex
+│   └── sheets_writer.py        ← Write data to Google Sheets
+├── dashboard/
+│   └── app.py                   ← Streamlit dashboard
+├── .env.example                 ← Credentials template
+├── requirements.txt             ← Python dependencies
+└── README.md
+```
 
 ---
 
