@@ -1,5 +1,7 @@
 # 📧 Receipt Automation Pipeline
 
+This is just a personal project!
+
 An automated system that reads receipt emails from Outlook,
 extracts transaction data using regex parsing, and stores it
 in Google Sheets for tracking and visualization.
@@ -30,8 +32,10 @@ End-to-end thinking — connecting multiple services together (email → Python 
 Security practices — .gitignore, secrets management, never committing credentials
 
 ◦What features could add in the future?
+
 LINE notification — send a message to your LINE app every time a new receipt is saved
 Category tags — label each store as Food, Transport, Shopping etc.
+Multi-currency support — handle receipts in different currencies if you travel.
 
 ## ✨ Features
 
