@@ -7,6 +7,8 @@ in Google Sheets for tracking and visualization.
 Built as a portfolio project to demonstrate end-to-end
 automation pipeline skills.
 
+![Dashboard Overview](img/image.png)
+
 ---
 
 ## ✨ Features
